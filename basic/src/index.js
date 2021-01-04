@@ -33,7 +33,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, mood: action.payload };
 
     default:
-      break;
+      return state;
   }
 };
 

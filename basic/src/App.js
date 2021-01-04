@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const currentMood = useSelector((state = {}) => state.mood);
+  const currentMood = useSelector((state) => state.mood);
 
   const handleMoodUpdate = (evt) => {
     const mood = evt.target.dataset.type;
