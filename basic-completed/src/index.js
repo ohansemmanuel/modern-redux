@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
@@ -20,21 +20,20 @@ export const MOODS = {
 };
 const INITIAL_STATE = { mood: MOODS.SAD };
 
-//action creators
-export const updateCatMood = createAction(UPDATE_MOOD);
-//reducer
-export const reducer = createReducer(
-  INITIAL_STATE,
-  {
-    [updateCatMood]: (state, action) => {
+const flappyMoodSlice = createSlice({
+  name: "mood",
+  initialState: INITIAL_STATE,
+  reducers: {
+    updateCatMood: (state, action) => {
       state.mood = action.payload;
     },
   },
-  [],
-  (state) => state
-);
+});
+
+export const { updateCatMood } = flappyMoodSlice.actions;
+
 //store
-const store = configureStore({ reducer });
+const store = configureStore({ reducer: flappyMoodSlice.reducer });
 
 ReactDOM.render(
   <React.StrictMode>
