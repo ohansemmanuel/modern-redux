@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
@@ -21,22 +21,18 @@ export const MOODS = {
 const INITIAL_STATE = { mood: MOODS.SAD };
 
 //action creators
-export const updateCatMood = (payload) => ({
-  type: UPDATE_MOOD,
-  payload,
-});
-
+export const updateCatMood = createAction(UPDATE_MOOD);
 //reducer
-export const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case UPDATE_MOOD:
-      return { ...state, mood: action.payload };
-
-    default:
-      return state;
-  }
-};
-
+export const reducer = createReducer(
+  INITIAL_STATE,
+  {
+    [updateCatMood]: (state, action) => {
+      state.mood = action.payload;
+    },
+  },
+  [],
+  (state) => state
+);
 //store
 const store = configureStore({ reducer });
 
