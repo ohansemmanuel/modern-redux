@@ -1,6 +1,6 @@
 import { Cat } from "react-kawaii";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCatMood, MOODS } from ".";
+import { updateCatMood, MOODS } from "./mood";
 
 import "./App.css";
 
