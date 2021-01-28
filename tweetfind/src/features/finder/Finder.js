@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Flex, Input, IconButton } from "@chakra-ui/react";
+import { Flex, Input, IconButton, Wrap, WrapItem } from "@chakra-ui/react";
+import TweetEmbed from "react-tweet-embed";
 import { SearchIcon } from "@chakra-ui/icons";
 import { findTweets } from "./findTweets";
 
 export function Finder() {
   const [searchValue, setSearchValue] = useState("");
+  const [data, setData] = useState([]);
+
   const handleSearch = async () => {
     if (searchValue) {
       setSearchValue("");
       const data = await findTweets(searchValue);
-      console.log({ data });
+      setData(data);
     }
   };
 
@@ -31,6 +34,13 @@ export function Finder() {
           type="submit"
         />
       </Flex>
+      <Wrap mt={5}>
+        {data.map((tweet) => (
+          <WrapItem key={tweet.id}>
+            <TweetEmbed id={tweet.id} />
+          </WrapItem>
+        ))}
+      </Wrap>
     </>
   );
 }
