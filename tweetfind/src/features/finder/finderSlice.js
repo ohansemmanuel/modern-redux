@@ -7,7 +7,7 @@ const finderSlice = createSlice({
   name: "finder",
   initialState,
   reducers: {
-    loadingTweetsSuccess(state, payload) {
+    loadingTweetsSuccess(state, { payload }) {
       state.tweets = payload;
       state.isLoading = false;
       state.error = null;
@@ -15,7 +15,7 @@ const finderSlice = createSlice({
     isLoadingTweets(state) {
       state.isLoading = true;
     },
-    loadingTweetsFailed(state, payload) {
+    loadingTweetsFailed(state, { payload }) {
       state.isLoading = false;
       state.error = payload;
     },
