@@ -7,11 +7,15 @@ const bearer = "Bearer " + process.env.REACT_APP_TOKEN;
  * @param {*} query - string
  */
 export const findTweets = async (query) => {
-  return await fetch(`${CORS_ANYWHERE}${URI}${query}`, {
+  const response = await fetch(`${CORS_ANYWHERE}${URI}${query}`, {
     headers: {
       Authorization: bearer,
     },
-  })
-    .then((res) => res.json())
-    .then((val) => val.data);
+  });
+
+  if (!response.ok) {
+    throw new Error(`Network wasn't ok!`);
+  }
+
+  return await response.json().then((val) => val.data);
 };

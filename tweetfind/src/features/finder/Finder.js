@@ -16,8 +16,7 @@ import { fetchTweets } from "./finderSlice";
 export function Finder() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
-  const { tweets, isLoading } = useSelector((state) => state);
-  console.log({ tweets, isLoading });
+  const { tweets = [], isLoading } = useSelector((state) => state);
 
   const handleSearch = async () => {
     if (searchValue) {

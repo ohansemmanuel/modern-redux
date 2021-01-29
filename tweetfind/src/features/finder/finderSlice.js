@@ -1,41 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { findTweets } from "./findTweets";
 
 const initialState = { tweets: [], isLoading: false, error: null };
 
+const FETCH_TWEETS = "FETCH_TWEETS";
+export const fetchTweets = createAsyncThunk(
+  FETCH_TWEETS,
+  async (searchValue, thunkAPI) => await findTweets(searchValue)
+);
+
 const finderSlice = createSlice({
   name: "finder",
   initialState,
-  reducers: {
-    loadingTweetsSuccess(state, { payload }) {
+  extraReducers: {
+    [fetchTweets.fulfilled]: (state, { payload }) => {
       state.tweets = payload;
       state.isLoading = false;
       state.error = null;
     },
-    isLoadingTweets(state) {
+    [fetchTweets.pending]: (state) => {
       state.isLoading = true;
     },
-    loadingTweetsFailed(state, { payload }) {
+    [fetchTweets.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },
   },
 });
 
-export const {
-  addTweets,
-  isLoadingTweets,
-  loadingTweetsSuccess,
-  loadingTweetsFailed,
-} = finderSlice.actions;
 export default finderSlice.reducer;
-
-export const fetchTweets = (searchValue) => async (dispatch) => {
-  try {
-    dispatch(isLoadingTweets());
-    const tweets = await findTweets(searchValue);
-    dispatch(loadingTweetsSuccess(tweets));
-  } catch (error) {
-    dispatch(loadingTweetsFailed(error.toString()));
-  }
-};
