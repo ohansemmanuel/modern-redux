@@ -6,12 +6,15 @@ const bearer = "Bearer " + process.env.REACT_APP_TOKEN;
  *
  * @param {*} query - string
  */
-export const findTweets = async (query) => {
-  const response = await fetch(`${CORS_ANYWHERE}${URI}${query}`, {
-    headers: {
-      Authorization: bearer,
-    },
-  });
+export const findTweets = async (searchQuery, amount) => {
+  const response = await fetch(
+    `${CORS_ANYWHERE}${URI}${searchQuery}&max_results=${amount}`,
+    {
+      headers: {
+        Authorization: bearer,
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`Network wasn't ok!`);

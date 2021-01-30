@@ -1,0 +1,1 @@
+export { NumberOfResults } from "./NumberOfResults";

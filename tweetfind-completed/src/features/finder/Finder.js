@@ -12,15 +12,18 @@ import { useSelector, useDispatch } from "react-redux";
 import TweetEmbed from "react-tweet-embed";
 import { SearchIcon } from "@chakra-ui/icons";
 import { fetchTweets } from "./finderSlice";
+import { NumberOfResults } from "../numberOfResults";
 
 export function Finder() {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
-  const { tweets = [], isLoading } = useSelector((state) => state);
+
+  const { tweets = [], isLoading } = useSelector((state) => state.finder);
+  const numberOfResults = useSelector((state) => state.numberOfResults);
 
   const handleSearch = async () => {
-    if (searchValue) {
-      dispatch(fetchTweets(searchValue));
+    if (searchValue && numberOfResults) {
+      dispatch(fetchTweets({ searchValue, numberOfResults }));
       setSearchValue("");
     }
   };
@@ -43,6 +46,8 @@ export function Finder() {
           type="submit"
         />
       </Flex>
+
+      <NumberOfResults />
 
       {isLoading && (
         <Stack mt={5}>

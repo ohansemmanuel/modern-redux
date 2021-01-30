@@ -6,7 +6,8 @@ const initialState = { tweets: [], isLoading: false, error: null };
 const FETCH_TWEETS = "FETCH_TWEETS";
 export const fetchTweets = createAsyncThunk(
   FETCH_TWEETS,
-  async (searchValue, thunkAPI) => await findTweets(searchValue)
+  async (params, thunkAPI) =>
+    await findTweets(params.searchValue, params.numberOfResults)
 );
 
 const finderSlice = createSlice({

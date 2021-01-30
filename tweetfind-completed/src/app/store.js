@@ -1,6 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import finderReducer from "../features/finder/finderSlice";
+import numberOfResultsReducer from "../features/numberOfResults/numberOfResultsSlice";
 
 export default configureStore({
-  reducer: finderReducer,
+  reducer: {
+    finder: finderReducer,
+    numberOfResults: numberOfResultsReducer,
+  },
 });
