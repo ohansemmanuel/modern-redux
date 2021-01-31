@@ -1,8 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+
+import finderReducer from "../features/finder/finderSlice";
+import numberOfResultsReducer from "../features/numberOfResults/numberOfResultsSlice";
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    finder: finderReducer,
+    numberOfResults: numberOfResultsReducer,
+  },
+  devTools: {
+    name: "TweetFind",
   },
 });
