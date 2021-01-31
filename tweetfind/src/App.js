@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Heading } from "@chakra-ui/react";
 
 import { Finder } from "./features/finder/Finder";
-import { NumberOfResults } from "./features/numberOfResults/NumberOfResults";
 
 function App() {
   return (
@@ -11,7 +10,6 @@ function App() {
         Welcome to TweetFind!
       </Heading>
       <Finder />
-      <NumberOfResults />
     </Container>
   );
 }
