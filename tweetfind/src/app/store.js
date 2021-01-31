@@ -1,14 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { rootReducer } from "./rootReducer";
 
-import finderReducer from "../features/finder/finderSlice";
-import numberOfResultsReducer from "../features/numberOfResults/numberOfResultsSlice";
-
-export default configureStore({
-  reducer: {
-    finder: finderReducer,
-    numberOfResults: numberOfResultsReducer,
-  },
+const store = configureStore({
+  reducer: rootReducer,
   devTools: {
     name: "TweetFind",
   },
 });
+
+if (process.env.NODE_ENV === "development" && module.hot) {
+  module.hot.accept("./rootReducer", () => {
+    const newRootReducer = require("./rootReducer").default;
+    store.replaceReducer(newRootReducer);
+  });
+}
+
+export default store;
