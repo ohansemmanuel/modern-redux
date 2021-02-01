@@ -9,6 +9,11 @@ import {
   WrapItem,
   Stack,
   Skeleton,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  AlertTitle,
+  CloseButton,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { NumberOfResults } from "../numberOfResults/NumberOfResults";
@@ -18,9 +23,8 @@ export function Finder() {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
 
-  const { tweets, isLoading } = useSelector((state) => state.finder);
+  const { tweets, isLoading, error } = useSelector((state) => state.finder);
   const numberOfResults = useSelector((state) => state.numberOfResults);
-  console.log({ tweets, isLoading });
 
   const handleSearch = async () => {
     if (searchValue) {
@@ -28,6 +32,19 @@ export function Finder() {
       setSearchValue("");
     }
   };
+
+  if (error) {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle mr={2}>An Error occurred!</AlertTitle>
+        <AlertDescription>
+          We couldn't fetch tweets right now. Please try again later.
+        </AlertDescription>
+        <CloseButton position="absolute" right="8px" top="8px" />
+      </Alert>
+    );
+  }
 
   return (
     <>
