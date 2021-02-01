@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { findTweets } from "./findTweets";
 
 const initialState = { tweets: [], isLoading: false, error: null };
@@ -13,7 +13,9 @@ const finderSlice = createSlice({
       state.error = null;
     },
     isLoadingTweets(state) {
+      console.log("Before isLoading: ", current(state));
       state.isLoading = true;
+      console.log("After isLoading: ", current(state));
     },
     loadingTweetsFailed(state, payload) {
       state.isLoading = false;
