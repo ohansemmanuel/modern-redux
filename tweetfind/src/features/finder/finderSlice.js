@@ -7,7 +7,7 @@ const finderSlice = createSlice({
   name: "finder",
   initialState,
   reducers: {
-    loadingTweetsSuccess(state, payload) {
+    loadingTweetsSuccess(state, { payload }) {
       state.tweets = payload;
       state.isLoading = false;
       state.error = null;
@@ -21,11 +21,13 @@ const finderSlice = createSlice({
 export const { isLoadingTweets, loadingTweetsSuccess } = finderSlice.actions;
 export default finderSlice.reducer;
 
-export const fetchTweets = (searchValue) => async (dispatch) => {
+export const fetchTweets = (searchValue, numberOfResults) => async (
+  dispatch
+) => {
   // loading ...
   dispatch(isLoadingTweets());
   // perform actual data fetch
-  const tweets = await findTweets(searchValue);
+  const tweets = await findTweets(searchValue, numberOfResults);
   // success
   dispatch(loadingTweetsSuccess(tweets));
 };

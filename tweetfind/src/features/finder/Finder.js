@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 import TweetEmbed from "react-tweet-embed";
-import { Flex, Input, IconButton, Wrap, WrapItem } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Flex,
+  Input,
+  IconButton,
+  Wrap,
+  WrapItem,
+  Stack,
+  Skeleton,
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { NumberOfResults } from "../numberOfResults/NumberOfResults";
-import { findTweets } from "./findTweets";
+import { fetchTweets } from "./finderSlice";
 
 export function Finder() {
   const [searchValue, setSearchValue] = useState("");
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+
+  const { tweets, isLoading } = useSelector((state) => state.finder);
+  const numberOfResults = useSelector((state) => state.numberOfResults);
+  console.log({ tweets, isLoading });
 
   const handleSearch = async () => {
     if (searchValue) {
+      dispatch(fetchTweets(searchValue, numberOfResults));
       setSearchValue("");
-      const data = await findTweets(searchValue, 10);
-      setData(data);
     }
   };
 
@@ -35,8 +47,17 @@ export function Finder() {
         />
       </Flex>
       <NumberOfResults />
+
+      {isLoading && (
+        <Stack mt={5}>
+          <Skeleton height="20px" />
+          <Skeleton height="20px" />
+          <Skeleton height="20px" />
+        </Stack>
+      )}
+
       <Wrap mt={5}>
-        {data.map((tweet) => (
+        {tweets.map((tweet) => (
           <WrapItem key={tweet.id}>
             <TweetEmbed id={tweet.id} />
           </WrapItem>
