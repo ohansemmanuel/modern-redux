@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const numberOfResultsSlice = createSlice({
   name: "numberOfResults",
-  initialState: 10,
+  initialState: "10",
   reducers: {
     setNumberOfResults(state, action) {
       return action.payload;

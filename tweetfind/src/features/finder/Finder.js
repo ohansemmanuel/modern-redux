@@ -28,7 +28,7 @@ export function Finder() {
 
   const handleSearch = async () => {
     if (searchValue) {
-      dispatch(fetchTweets(searchValue, numberOfResults));
+      dispatch(fetchTweets({ searchValue, numberOfResults }));
       setSearchValue("");
     }
   };
