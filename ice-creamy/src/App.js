@@ -1,4 +1,4 @@
-import { Cat } from "react-kawaii";
+import { IceCream } from "react-kawaii";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCatMood, MOODS } from "./mood";
 
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <Cat size={320} mood={currentMood} color="#596881" />
+      <IceCream size={320} mood={currentMood} color="#FDA7DC" />
       <section>
         {Object.values(MOODS).map((mood) => (
           <button

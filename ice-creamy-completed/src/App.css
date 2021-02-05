@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+}
+
+button {
+  display: inline-block;
+  border: 1px solid #fff;
+  margin: 0 2px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+button.selected {
+  background-color: #fff;
+  color: #282c34;
+}

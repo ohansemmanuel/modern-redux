@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
-import moodReducer from "./mood";
+import { reducer } from "./mood";
 import App from "./App";
+
 import "./index.css";
 
 //store
-const store = configureStore({ reducer: moodReducer });
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
