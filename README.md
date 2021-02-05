@@ -4,4 +4,4 @@
 
 Not every application needs Redux, and that's okay! There are also countless alternatives. However, if you write redux, this book describes modern redux and the new best practices.
 
-See table of contents and more details on the [website](https://modern-redux-tweefind.netlify.app/).
+See table of contents and more details on the [website](https://modernreduxjs.com/).
